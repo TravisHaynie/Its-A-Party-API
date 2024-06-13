@@ -5,12 +5,38 @@ body {
 
 .swim-lanes {
   min-height: 60vh;
+
 }
 
 .task-card {
-  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: move;
+ z-index: 1;
+}
+
+.task-card h3 {
+  margin-top: 0;
 }
 
 .task-card:hover {
   cursor: grab;
 }
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.overdue {
+  background-color: red;
+}
+
+.almost-due {
+  background-color: yellow;
+}
+
+
