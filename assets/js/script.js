@@ -1,5 +1,5 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks")) && [];
+let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // Function to generate a unique task id
@@ -11,6 +11,7 @@ function generateTaskId() {
 // Function to create a task card
 function createTaskCard(task) {
     const taskCard = $('<div>').addClass('task-card');
+    const  deleteButton =$('<button class= "delete-task">Delete</button>');
 
     const today = dayjs();
     const dueDate = dayjs(task.deadline);
@@ -26,7 +27,7 @@ function createTaskCard(task) {
 
     // Append task details to the task card
     taskCard.append(titleElement, deadlineElement, descriptionElement);
-
+    taskCard.append(deleteButton);
     // Append the task card to a container element in your HTML (e.g., a div with id 'task-board')
     $('#task-board').append(taskCard);
 }
@@ -37,10 +38,10 @@ function renderTaskList() {
         createTaskCard(task);
     });
 
-    $('.task-card').draggable({
-        revert: 'invalid',
-        cursor: 'move'
-    });
+      $('.task-card').draggable({
+          revert: 'invalid',
+          cursor: 'move'
+      });
 }
 
 // Function to handle adding a new task
@@ -49,6 +50,7 @@ function handleAddTask(event) {
     let title = $('#title').val();
     let deadline = $('#datepicker').val();
     let description = $('#description').val();
+    
 
     let newTask = {
         id: generateTaskId(),
@@ -89,13 +91,13 @@ function handleDeleteTask(event) {
 }
 
 // Function to handle dropping a task into a new status lane
-function handleDrop(event,ui) {
+function handleDrop(event, ui) {
     const droppedTaskId = ui.draggable.data('id');
     const newStatus = $(this).attr('id');
 
     // Find the dropped task in the taskList
     const droppedTaskIndex = taskList.findIndex(task => task.id === droppedTaskId);
-    if (droppedTaskIndex == 1) {
+    if (droppedTaskIndex !== -1) {
         // Update the status of the dropped task
         taskList[droppedTaskIndex].status = newStatus;
     }
@@ -113,7 +115,7 @@ $(document).ready(function () {
         revert: 'invalid',
         cursor: 'move'
     });
-
+   
     // Make swim lanes droppable
     $('.lane').droppable({
         drop: handleDrop
@@ -127,4 +129,6 @@ $(document).ready(function () {
         changeMonth: true,
         changeYear: true,
     });
+
+    $(document).on('click', '.delete-task', handleDeleteTask);
 });
