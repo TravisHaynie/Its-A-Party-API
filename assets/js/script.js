@@ -5,13 +5,14 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 // Function to generate a unique task id
 function generateTaskId() {
     nextId++;
+
     localStorage.setItem("nextId", JSON.stringify(nextId));
 }
 
 // Function to create a task card
 function createTaskCard(task) {
     const taskCard = $('<div>').addClass('task-card');
-    const  deleteButton =$('<button class= "delete-task">Delete</button>');
+    const deleteButton = $('<button class= "delete-task">Delete</button>');
 
     const today = dayjs();
     const dueDate = dayjs(task.deadline);
@@ -38,10 +39,10 @@ function renderTaskList() {
         createTaskCard(task);
     });
 
-      $('.task-card').draggable({
-          revert: 'invalid',
-          cursor: 'move'
-      });
+    $('.task-card').draggable({
+        revert: 'invalid',
+        cursor: 'move'
+    });
 }
 
 // Function to handle adding a new task
@@ -50,7 +51,7 @@ function handleAddTask(event) {
     let title = $('#title').val();
     let deadline = $('#datepicker').val();
     let description = $('#description').val();
-    
+
 
     let newTask = {
         id: generateTaskId(),
@@ -88,6 +89,7 @@ function handleDeleteTask(event) {
 
     // Remove the task card from the UI
     taskCard.remove();
+
 }
 
 // Function to handle dropping a task into a new status lane
@@ -115,7 +117,7 @@ $(document).ready(function () {
         revert: 'invalid',
         cursor: 'move'
     });
-   
+
     // Make swim lanes droppable
     $('.lane').droppable({
         drop: handleDrop
