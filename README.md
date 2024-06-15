@@ -1,12 +1,12 @@
 # Its-A-Party-API
 
 ## Description
-
+This is a kanban board for task managment. Click ass task and input your task. Once you input your task the task will then be displayed in the to-do section with either being red overdue, or yellow almost due. Move your task card to diffrent lanes until you get to the done lane which the color will revert back to white which indicates it being done. Once there you can hit the delte button which will remove task.
 ## Deployed Url
 
 
 ## screenshot
-
+./assets/images/ask board.png
 
 
 
