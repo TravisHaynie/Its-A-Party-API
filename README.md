@@ -6,7 +6,7 @@ This is a kanban board for task managment. Click ass task and input your task. O
 
 
 ## screenshot
-./assets/images/ask board.png
+C:\Users\Travis haynie\MindGAME\Its-A-Party-API\assets\images\task board.png
 
 
 
